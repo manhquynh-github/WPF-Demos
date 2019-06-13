@@ -1,0 +1,114 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ObjectDetectionVisualizer.Styles">
+  <Storyboard x:Key="FloatUpStoryboard">
+    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).Children[0].Y"
+                     From="10"
+                     To="0"
+                     Duration="0:0:0.4">
+      <DoubleAnimation.EasingFunction>
+        <ExponentialEase EasingMode="EaseOut" />
+      </DoubleAnimation.EasingFunction>
+    </DoubleAnimation>
+  </Storyboard>
+  <Storyboard x:Key="RiseUpStoryboard">
+    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).Children[0].Y"
+                     From="0"
+                     To="-0"
+                     Duration="0:0:0.4">
+      <DoubleAnimation.EasingFunction>
+        <ExponentialEase EasingMode="EaseOut" />
+      </DoubleAnimation.EasingFunction>
+    </DoubleAnimation>
+  </Storyboard>
+  <Storyboard x:Key="FloatDownStoryboard">
+    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).Children[0].Y"
+                     From="-10"
+                     To="0"
+                     Duration="0:0:0.4">
+      <DoubleAnimation.EasingFunction>
+        <ExponentialEase EasingMode="EaseOut" />
+      </DoubleAnimation.EasingFunction>
+    </DoubleAnimation>
+  </Storyboard>
+  <Storyboard x:Key="FlyToLeftStoryboard">
+    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).Children[0].X"
+                     From="0"
+                     To="-10"
+                     Duration="0:0:0.4">
+      <DoubleAnimation.EasingFunction>
+        <ExponentialEase EasingMode="EaseOut" />
+      </DoubleAnimation.EasingFunction>
+    </DoubleAnimation>
+  </Storyboard>
+  <Storyboard x:Key="FlyFromLeftStoryboard">
+    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).Children[0].X"
+                     From="-10"
+                     To="0"
+                     Duration="0:0:0.4">
+      <DoubleAnimation.EasingFunction>
+        <ExponentialEase EasingMode="EaseOut" />
+      </DoubleAnimation.EasingFunction>
+    </DoubleAnimation>
+  </Storyboard>
+  <Storyboard x:Key="FlyToRightStoryboard">
+    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).Children[0].X"
+                     From="0"
+                     To="10"
+                     Duration="0:0:0.4">
+      <DoubleAnimation.EasingFunction>
+        <ExponentialEase EasingMode="EaseOut" />
+      </DoubleAnimation.EasingFunction>
+    </DoubleAnimation>
+  </Storyboard>
+  <Storyboard x:Key="FlyFromRightStoryboard">
+    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).Children[0].X"
+                     From="10"
+                     To="0"
+                     Duration="0:0:0.4">
+      <DoubleAnimation.EasingFunction>
+        <ExponentialEase EasingMode="EaseOut" />
+      </DoubleAnimation.EasingFunction>
+    </DoubleAnimation>
+  </Storyboard>
+  <Storyboard x:Key="FadeInStoryboard">
+    <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)"
+                     From="0"
+                     To="1"
+                     Duration="0:0:0.4">
+      <DoubleAnimation.EasingFunction>
+        <ExponentialEase EasingMode="EaseOut" />
+      </DoubleAnimation.EasingFunction>
+    </DoubleAnimation>
+  </Storyboard>
+  <Storyboard x:Key="FadeOutStoryboard">
+    <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)"
+                     From="1"
+                     To="0"
+                     Duration="0:0:0.4">
+      <DoubleAnimation.EasingFunction>
+        <ExponentialEase EasingMode="EaseOut" />
+      </DoubleAnimation.EasingFunction>
+    </DoubleAnimation>
+  </Storyboard>
+  <Storyboard x:Key="ScaleMouseDownStoryboard">
+    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).Children[1].ScaleX"
+                     From="1"
+                     To="0.985"
+                     Duration="0:0:0" />
+    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).Children[1].ScaleY"
+                     From="1"
+                     To="0.985"
+                     Duration="0:0:0" />
+  </Storyboard>
+  <Storyboard x:Key="ScaleMouseUpStoryboard">
+    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).Children[1].ScaleX"
+                     From="0.985"
+                     To="1"
+                     Duration="0:0:0.1" />
+    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).Children[1].ScaleY"
+                     From="0.985"
+                     To="1"
+                     Duration="0:0:0.1" />
+  </Storyboard>
+</ResourceDictionary>

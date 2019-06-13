@@ -1,0 +1,157 @@
+﻿<Page x:Class="WPFDemos.AllDemoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:T="clr-namespace:WPFDemos.Themes"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:WPFDemos"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      Title="All Demos"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
+      mc:Ignorable="d">
+  <Page.Resources>
+    <SolidColorBrush x:Key="Item.MouseOver.Background"
+                     Color="#1F26A0DA" />
+    <SolidColorBrush x:Key="Item.SelectedInactive.Background"
+                     Color="#3DDADADA" />
+    <SolidColorBrush x:Key="Item.SelectedActive.Background"
+                     Color="#3D26A0DA" />
+    <Style x:Key="DemoListBoxItemStyle"
+           TargetType="{x:Type ListBoxItem}">
+      <Setter Property="Background"
+              Value="Transparent" />
+      <Setter Property="BorderBrush"
+              Value="Transparent" />
+      <Setter Property="BorderThickness"
+              Value="0" />
+      <Setter Property="FocusVisualStyle"
+              Value="{StaticResource CustomFocusVisual}" />
+      <Setter Property="HorizontalContentAlignment"
+              Value="{Binding HorizontalContentAlignment,
+                              RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+      <Setter Property="Padding"
+              Value="10,5" />
+      <Setter Property="SnapsToDevicePixels"
+              Value="True" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type ListBoxItem}">
+            <Border x:Name="Bd"
+                    Margin="7,0"
+                    Padding="{TemplateBinding Padding}"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="2"
+                    SnapsToDevicePixels="true">
+              <Border.Effect>
+                <DropShadowEffect x:Name="dropShadowEffect"
+                                  BlurRadius="10"
+                                  Direction="270"
+                                  Opacity="0" />
+              </Border.Effect>
+              <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+            </Border>
+            <ControlTemplate.Triggers>
+              <MultiTrigger>
+                <MultiTrigger.Conditions>
+                  <Condition Property="IsMouseOver"
+                             Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Bd"
+                        Property="Background"
+                        Value="{StaticResource Item.MouseOver.Background}" />
+                <MultiTrigger.EnterActions>
+                  <BeginStoryboard>
+                    <Storyboard>
+                      <DoubleAnimation Storyboard.TargetName="dropShadowEffect"
+                                       Storyboard.TargetProperty="Opacity"
+                                       To="1"
+                                       Duration="0:0:0.1" />
+                    </Storyboard>
+                  </BeginStoryboard>
+                </MultiTrigger.EnterActions>
+                <MultiTrigger.ExitActions>
+                  <BeginStoryboard>
+                    <Storyboard>
+                      <DoubleAnimation Storyboard.TargetName="dropShadowEffect"
+                                       Storyboard.TargetProperty="Opacity"
+                                       To="0"
+                                       Duration="0:0:0.1" />
+                    </Storyboard>
+                  </BeginStoryboard>
+                </MultiTrigger.ExitActions>
+              </MultiTrigger>
+              <MultiTrigger>
+                <MultiTrigger.Conditions>
+                  <Condition Property="Selector.IsSelectionActive"
+                             Value="False" />
+                  <Condition Property="IsSelected"
+                             Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Bd"
+                        Property="Background"
+                        Value="{StaticResource Item.SelectedInactive.Background}" />
+              </MultiTrigger>
+              <MultiTrigger>
+                <MultiTrigger.Conditions>
+                  <Condition Property="Selector.IsSelectionActive"
+                             Value="True" />
+                  <Condition Property="IsSelected"
+                             Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="Bd"
+                        Property="Background"
+                        Value="{StaticResource Item.SelectedActive.Background}" />
+                <Setter TargetName="Bd"
+                        Property="Effect">
+                  <Setter.Value>
+                    <DropShadowEffect BlurRadius="10"
+                                      Direction="270"
+                                      Opacity="1" />
+                  </Setter.Value>
+                </Setter>
+              </MultiTrigger>
+              <Trigger Property="IsEnabled"
+                       Value="False">
+                <Setter TargetName="Bd"
+                        Property="TextElement.Foreground"
+                        Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="VerticalContentAlignment"
+              Value="{Binding VerticalContentAlignment,
+                              RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+    </Style>
+    <DataTemplate x:Key="DemoDataTemplate">
+      <TextBlock Text="{Binding Title}" />
+    </DataTemplate>
+    <Style x:Key="DemoListBoxStyle"
+           TargetType="{x:Type ListBox}">
+      <Setter Property="Background"
+              Value="Transparent" />
+      <Setter Property="BorderThickness"
+              Value="0" />
+      <Setter Property="ClipToBounds"
+              Value="False" />
+      <Setter Property="FontSize"
+              Value="16" />
+      <Setter Property="ItemContainerStyle"
+              Value="{StaticResource DemoListBoxItemStyle}" />
+      <Setter Property="ItemTemplate"
+              Value="{StaticResource DemoDataTemplate}" />
+    </Style>
+
+  </Page.Resources>
+  <Grid>
+    <ListBox x:Name="DemoListBox"
+             MouseDoubleClick="DemoListBox_MouseDoubleClick"
+             Style="{StaticResource DemoListBoxStyle}" />
+  </Grid>
+</Page>

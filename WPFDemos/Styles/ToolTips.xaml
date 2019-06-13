@@ -1,0 +1,53 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ObjectDetectionVisualizer.Styles">
+  <SolidColorBrush x:Key="Custom.ToolTip.Background"
+                   Color="#FFE0E0E0" />
+  <SolidColorBrush x:Key="Custom.ToolTip.Foreground"
+                   Color="Black" />
+  <SolidColorBrush x:Key="Custom.ToolTip.BorderBrush"
+                   Color="#FFCCCCCC" />
+  <Style x:Key="{x:Type ToolTip}"
+         TargetType="ToolTip">
+    <Setter Property="Background"
+            Value="{StaticResource Custom.ToolTip.Background}" />
+    <Setter Property="BorderBrush"
+            Value="{StaticResource Custom.ToolTip.BorderBrush}" />
+    <Setter Property="FontFamily"
+            Value="Segoe UI Light" />
+    <Setter Property="FontSize"
+            Value="{StaticResource Custom.FontSize.Small}" />
+    <Setter Property="Foreground"
+            Value="{StaticResource Custom.ToolTip.Foreground}" />
+    <Setter Property="HasDropShadow"
+            Value="True" />
+    <Setter Property="OverridesDefaultStyle"
+            Value="true" />
+    <Setter Property="Padding"
+            Value="7" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ToolTip">
+          <Border Name="Border"
+                  Width="{TemplateBinding Width}"
+                  Height="{TemplateBinding Height}"
+                  Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="1">
+            <ContentPresenter Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top" />
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="HasDropShadow"
+                     Value="true">
+              <Setter TargetName="Border"
+                      Property="SnapsToDevicePixels"
+                      Value="true" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

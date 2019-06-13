@@ -1,0 +1,57 @@
+﻿<Window x:Class="WPFDemos.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:T="clr-namespace:WPFDemos.Themes"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:WPFDemos"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="MainWindow"
+        Width="800"
+        Height="600"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d">
+  <Grid Background="{StaticResource Custom.Toolbar.Background}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="40" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="40" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <T:IconButton x:Name="BackButton"
+                  Margin="10,0,0,0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  Click="BackButton_Click"
+                  Icon="&#xE0A6;">
+      <Button.Style>
+        <Style BasedOn="{StaticResource ToolbarButtonStyle}"
+               TargetType="T:IconButton">
+          <Setter Property="Visibility"
+                  Value="Hidden" />
+          <Style.Triggers>
+            <DataTrigger Binding="{Binding CanGoBack,
+                                           ElementName=MainFrame}"
+                         Value="True">
+              <Setter Property="Visibility"
+                      Value="Visible" />
+            </DataTrigger>
+          </Style.Triggers>
+        </Style>
+      </Button.Style>
+    </T:IconButton>
+    <TextBlock Grid.Column="1"
+               Margin="10,0,0,0"
+               VerticalAlignment="Center"
+               FontSize="16"
+               Text="{Binding ElementName=MainFrame,
+                              Path=Content.Title}" />
+    <Frame x:Name="MainFrame"
+           Grid.Row="1"
+           Grid.ColumnSpan="2"
+           Background="{StaticResource Custom.Background}"
+           NavigationUIVisibility="Hidden"
+           Source="/WPFDemos;component/AllDemoPage.xaml" />
+  </Grid>
+</Window>

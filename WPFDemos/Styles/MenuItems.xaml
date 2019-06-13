@@ -1,0 +1,428 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ObjectDetectionVisualizer.Styles">
+  <SolidColorBrush x:Key="Custom.MenuItem.Background"
+                   Color="Transparent" />
+  <SolidColorBrush x:Key="Custom.MenuItem.Background.Highlight"
+                   Color="#0A000000" />
+  <SolidColorBrush x:Key="Custom.MenuItem.Background.Pressed"
+                   Color="#26000000" />
+  <SolidColorBrush x:Key="Custom.MenuItem.InputGestureText.Foreground"
+                   Color="#FF767676" />
+  <SolidColorBrush x:Key="Custom.MenuItem.Foreground.Disabled"
+                   Color="#FFE0E0E0" />
+  <!--#region MenuScrollViewer-->
+  <!--<MenuScrollingVisibilityConverter x:Key="MenuScrollingVisibilityConverter" />-->
+  <!--<Style x:Key="MenuScrollViewer"
+         BasedOn="{x:Null}"
+         TargetType="{x:Type ScrollViewer}">
+    <Setter Property="HorizontalScrollBarVisibility"
+            Value="Hidden" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ScrollViewer}">
+          <Grid SnapsToDevicePixels="True">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <RepeatButton Grid.Row="0"
+                          Grid.Column="0"
+                          Command="{x:Static ScrollBar.LineUpCommand}"
+                          CommandTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                          Focusable="False">
+              <RepeatButton.Visibility>
+                <MultiBinding Converter="{StaticResource MenuScrollingVisibilityConverter}"
+                              ConverterParameter="0"
+                              FallbackValue="Visibility.Collapsed">
+                  <Binding Path="ComputedVerticalScrollBarVisibility"
+                           RelativeSource="{RelativeSource TemplatedParent}" />
+                  <Binding Path="VerticalOffset"
+                           RelativeSource="{RelativeSource TemplatedParent}" />
+                  <Binding Path="ExtentHeight"
+                           RelativeSource="{RelativeSource TemplatedParent}" />
+                  <Binding Path="ViewportHeight"
+                           RelativeSource="{RelativeSource TemplatedParent}" />
+                </MultiBinding>
+              </RepeatButton.Visibility>
+              <Path Fill="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}" />
+            </RepeatButton>
+            <Border Grid.Row="1"
+                    Grid.Column="0">
+              <ScrollContentPresenter Margin="{TemplateBinding Padding}" />
+            </Border>
+            <RepeatButton Grid.Row="2"
+                          Grid.Column="0"
+                          Command="{x:Static ScrollBar.LineDownCommand}"
+                          CommandTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                          Focusable="False">
+              <RepeatButton.Visibility>
+                <MultiBinding Converter="{StaticResource MenuScrollingVisibilityConverter}"
+                              ConverterParameter="100"
+                              FallbackValue="Visibility.Collapsed">
+                  <Binding Path="ComputedVerticalScrollBarVisibility"
+                           RelativeSource="{RelativeSource TemplatedParent}" />
+                  <Binding Path="VerticalOffset"
+                           RelativeSource="{RelativeSource TemplatedParent}" />
+                  <Binding Path="ExtentHeight"
+                           RelativeSource="{RelativeSource TemplatedParent}" />
+                  <Binding Path="ViewportHeight"
+                           RelativeSource="{RelativeSource TemplatedParent}" />
+                </MultiBinding>
+              </RepeatButton.Visibility>
+              <Path Fill="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}" />
+            </RepeatButton>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="VerticalScrollBarVisibility"
+            Value="Auto" />
+  </Style>-->
+  <!--#endregion-->
+  <!--#region TopLevel-->
+  <!--  TopLevelHeader  -->
+  <!--
+  <ControlTemplate x:Key="{x:Static MenuItem.TopLevelHeaderTemplateKey}"
+                   TargetType="{x:Type MenuItem}">
+    <Border x:Name="Border">
+      <Grid>
+        <ContentPresenter ContentSource="Header"
+                          RecognizesAccessKey="True" />
+        <Popup x:Name="Popup"
+               AllowsTransparency="True"
+               Focusable="False"
+               IsOpen="{TemplateBinding IsSubmenuOpen}"
+               Placement="Bottom"
+               PopupAnimation="Fade">
+          <Border x:Name="SubmenuBorder"
+                  Margin="15"
+                  Padding="0,7"
+                  BorderThickness="1"
+                  SnapsToDevicePixels="True"
+                  Style="{StaticResource PopupBorderStyle}">
+            <ScrollViewer CanContentScroll="True"
+                          Style="{StaticResource MenuScrollViewer}">
+              <StackPanel IsItemsHost="True"
+                          KeyboardNavigation.DirectionalNavigation="Cycle" />
+            </ScrollViewer>
+          </Border>
+        </Popup>
+      </Grid>
+    </Border>
+    <ControlTemplate.Triggers>
+      <Trigger Property="IsSuspendingPopupAnimation"
+               Value="true">
+        <Setter TargetName="Popup"
+                Property="PopupAnimation"
+                Value="None" />
+      </Trigger>
+      <Trigger Property="IsHighlighted"
+               Value="true">
+        <Setter TargetName="Border"
+                Property="Background">
+          <Setter.Value>
+            <LinearGradientBrush StartPoint="0,0"
+                                 EndPoint="0,1">
+              <LinearGradientBrush.GradientStops>
+                <GradientStopCollection>
+                  <GradientStop Color="{StaticResource ControlLightColor}" />
+                  <GradientStop Offset="1.0"
+                                Color="{StaticResource ControlMouseOverColor}" />
+                </GradientStopCollection>
+              </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+          </Setter.Value>
+        </Setter>
+        <Setter TargetName="Border"
+                Property="BorderBrush"
+                Value="Transparent" />
+      </Trigger>
+      <Trigger SourceName="Popup"
+               Property="AllowsTransparency"
+               Value="True">
+        <Setter TargetName="SubmenuBorder"
+                Property="CornerRadius"
+                Value="0,0,4,4" />
+        <Setter TargetName="SubmenuBorder"
+                Property="Padding"
+                Value="0,0,0,3" />
+      </Trigger>
+      <Trigger Property="IsEnabled"
+               Value="False">
+        <Setter Property="Foreground">
+          <Setter.Value>
+            <SolidColorBrush Color="{StaticResource DisabledForegroundColor}" />
+          </Setter.Value>
+        </Setter>
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  -->
+  <!--  TopLevelItem  -->
+  <!--
+  <ControlTemplate x:Key="{x:Static MenuItem.TopLevelItemTemplateKey}"
+                   TargetType="{x:Type MenuItem}">
+    <Border x:Name="Border">
+      <Grid>
+        <ContentPresenter Margin="6,3,6,3"
+                          ContentSource="Header"
+                          RecognizesAccessKey="True" />
+      </Grid>
+    </Border>
+    <ControlTemplate.Triggers>
+      <Trigger Property="IsHighlighted"
+               Value="true">
+        <Setter TargetName="Border"
+                Property="Background">
+          <Setter.Value>
+            <LinearGradientBrush StartPoint="0,0"
+                                 EndPoint="0,1">
+              <LinearGradientBrush.GradientStops>
+                <GradientStopCollection>
+                  <GradientStop Color="{StaticResource ControlLightColor}" />
+                  <GradientStop Offset="1.0"
+                                Color="{StaticResource ControlMouseOverColor}" />
+                </GradientStopCollection>
+              </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+          </Setter.Value>
+        </Setter>
+      </Trigger>
+      <Trigger Property="IsEnabled"
+               Value="False">
+        <Setter Property="Foreground">
+          <Setter.Value>
+            <SolidColorBrush Color="{StaticResource DisabledForegroundColor}" />
+          </Setter.Value>
+        </Setter>
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>-->
+  <!--#endregion-->
+  <!--#region Submenu-->
+  <!--  SubmenuItem  -->
+  <ControlTemplate x:Key="{x:Static MenuItem.SubmenuItemTemplateKey}"
+                   TargetType="{x:Type MenuItem}">
+    <Border x:Name="Border"
+            Background="{StaticResource Custom.MenuItem.Background}">
+      <Grid Margin="{TemplateBinding Padding}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"
+                            SharedSizeGroup="Icon" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto"
+                            SharedSizeGroup="Shortcut" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="Icon"
+                   Margin="10,0"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontFamily="Segoe MDL2 Assets"
+                   Text="{TemplateBinding Icon}" />
+        <Border x:Name="Check"
+                Visibility="Collapsed">
+          <TextBlock x:Name="CheckMark"
+                     Margin="10,0"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     FontFamily="Segoe MDL2 Assets"
+                     Text="&#xE73E;"
+                     Visibility="Hidden" />
+        </Border>
+        <ContentPresenter x:Name="HeaderHost"
+                          Grid.Column="1"
+                          ContentSource="Header"
+                          RecognizesAccessKey="True" />
+        <TextBlock x:Name="InputGestureText"
+                   Grid.Column="2"
+                   Margin="10,0"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   Foreground="{StaticResource Custom.MenuItem.InputGestureText.Foreground}"
+                   Text="{TemplateBinding InputGestureText}" />
+      </Grid>
+    </Border>
+    <ControlTemplate.Triggers>
+      <!--<Trigger Property="ButtonBase.Command"
+               Value="{x:Null}" />-->
+      <Trigger Property="Icon"
+               Value="{x:Null}">
+        <Setter TargetName="Icon"
+                Property="Visibility"
+                Value="Hidden" />
+      </Trigger>
+      <Trigger Property="IsChecked"
+               Value="true">
+        <Setter TargetName="CheckMark"
+                Property="Visibility"
+                Value="Visible" />
+      </Trigger>
+      <Trigger Property="IsCheckable"
+               Value="true">
+        <Setter TargetName="Check"
+                Property="Visibility"
+                Value="Visible" />
+        <Setter TargetName="Icon"
+                Property="Visibility"
+                Value="Hidden" />
+      </Trigger>
+      <Trigger Property="IsHighlighted"
+               Value="true">
+        <Setter TargetName="Border"
+                Property="Background"
+                Value="{StaticResource Custom.MenuItem.Background.Highlight}" />
+      </Trigger>
+      <Trigger Property="IsPressed"
+               Value="True">
+        <Setter TargetName="Border"
+                Property="Background"
+                Value="{StaticResource Custom.MenuItem.Background.Pressed}" />
+      </Trigger>
+      <Trigger Property="IsEnabled"
+               Value="false">
+        <Setter Property="Foreground"
+                Value="{StaticResource Custom.MenuItem.Foreground.Disabled}" />
+        <Setter TargetName="InputGestureText"
+                Property="Foreground"
+                Value="{StaticResource Custom.MenuItem.Foreground.Disabled}" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <ControlTemplate x:Key="{x:Static MenuItem.SubmenuHeaderTemplateKey}"
+                   TargetType="{x:Type MenuItem}">
+    <Border x:Name="Border"
+            Background="{StaticResource Custom.MenuItem.Background}">
+      <Grid Margin="{TemplateBinding Padding}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"
+                            SharedSizeGroup="Icon" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto"
+                            SharedSizeGroup="Shortcut" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="Icon"
+                   Margin="10,0"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontFamily="Segoe MDL2 Assets"
+                   Text="{TemplateBinding Icon}" />
+        <Popup x:Name="Popup"
+               AllowsTransparency="True"
+               Focusable="False"
+               HorizontalOffset="-4"
+               IsOpen="{TemplateBinding IsSubmenuOpen}"
+               Placement="Right"
+               PopupAnimation="Fade"
+               VerticalOffset="-12">
+          <Border x:Name="SubmenuBorder"
+                  Margin="15"
+                  Padding="0,7"
+                  SnapsToDevicePixels="True"
+                  Style="{StaticResource PopupBorderStyle}">
+            <ScrollViewer CanContentScroll="True">
+              <StackPanel IsItemsHost="True"
+                          KeyboardNavigation.DirectionalNavigation="Cycle" />
+            </ScrollViewer>
+          </Border>
+        </Popup>
+        <ContentPresenter x:Name="HeaderHost"
+                          Grid.Column="1"
+                          ContentSource="Header"
+                          RecognizesAccessKey="True" />
+        <TextBlock x:Name="InputGestureText"
+                   Grid.Column="2"
+                   Margin="10,0"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   Foreground="{StaticResource Custom.MenuItem.InputGestureText.Foreground}"
+                   Text="{TemplateBinding InputGestureText}" />
+        <TextBlock Grid.Column="3"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontFamily="Segoe MDL2 Assets"
+                   Text="&#xE76C;" />
+      </Grid>
+    </Border>
+    <ControlTemplate.Triggers>
+      <Trigger Property="Icon"
+               Value="{x:Null}">
+        <Setter TargetName="Icon"
+                Property="Visibility"
+                Value="Collapsed" />
+      </Trigger>
+      <Trigger Property="IsHighlighted"
+               Value="true">
+        <Setter TargetName="Border"
+                Property="Background"
+                Value="{StaticResource Custom.MenuItem.Background.Highlight}" />
+      </Trigger>
+      <Trigger Property="IsPressed"
+               Value="True">
+        <Setter TargetName="Border"
+                Property="Background"
+                Value="{StaticResource Custom.MenuItem.Background.Pressed}" />
+      </Trigger>
+      <Trigger Property="IsEnabled"
+               Value="false">
+        <Setter Property="Foreground"
+                Value="{StaticResource Custom.MenuItem.Foreground.Disabled}" />
+        <Setter TargetName="InputGestureText"
+                Property="Foreground"
+                Value="{StaticResource Custom.MenuItem.Foreground.Disabled}" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <!--#endregion-->
+  <!--  MenuItem Style  -->
+  <Style TargetType="{x:Type MenuItem}">
+    <Setter Property="Background"
+            Value="Transparent" />
+    <Setter Property="BorderThickness"
+            Value="0" />
+    <Setter Property="FontFamily"
+            Value="Segoe UI Light" />
+    <Setter Property="FontSize"
+            Value="{StaticResource Custom.FontSize.Medium}" />
+    <Setter Property="OverridesDefaultStyle"
+            Value="True" />
+    <Setter Property="OverridesDefaultStyle"
+            Value="True" />
+    <Setter Property="Padding"
+            Value="0,5" />
+    <Setter Property="ScrollViewer.PanningMode"
+            Value="Both" />
+    <Setter Property="Stylus.IsFlicksEnabled"
+            Value="False" />
+    <Style.Triggers>
+      <!--<Trigger Property="Role"
+               Value="TopLevelHeader">
+        <Setter Property="Grid.IsSharedSizeScope"
+                Value="true" />
+        <Setter Property="Template"
+                Value="{StaticResource {x:Static MenuItem.TopLevelHeaderTemplateKey}}" />
+      </Trigger>
+      <Trigger Property="Role"
+               Value="TopLevelItem">
+        <Setter Property="Template"
+                Value="{StaticResource {x:Static MenuItem.TopLevelItemTemplateKey}}" />
+      </Trigger>-->
+      <Trigger Property="Role"
+               Value="SubmenuHeader">
+        <Setter Property="Template"
+                Value="{StaticResource {x:Static MenuItem.SubmenuHeaderTemplateKey}}" />
+      </Trigger>
+      <Trigger Property="Role"
+               Value="SubmenuItem">
+        <Setter Property="Template"
+                Value="{StaticResource {x:Static MenuItem.SubmenuItemTemplateKey}}" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+</ResourceDictionary>
